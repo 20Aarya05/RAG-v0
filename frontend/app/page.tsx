@@ -6,6 +6,7 @@ import FileList from '@/components/FileList'
 import ProcessingStatus from '@/components/ProcessingStatus'
 import ConfigPanel from '@/components/ConfigPanel'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/Tabs'
+import ChatBot from '@/components/ChatBot'
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState('upload')
@@ -37,15 +38,24 @@ export default function Home() {
           Upload your documents (PDF, DOCX, PPTX) and convert them into embeddings 
           for Retrieval-Augmented Generation. Support for both cloud and local processing.
         </p>
+        <div className="mt-6">
+          <button 
+            onClick={() => setActiveTab('chat')}
+            className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            🤖 Try AI Assistant
+          </button>
+        </div>
       </div>
 
       {/* Main Content */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-4">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="upload">📤 Upload</TabsTrigger>
           <TabsTrigger value="files">📁 Files</TabsTrigger>
           <TabsTrigger value="status">⚡ Status</TabsTrigger>
           <TabsTrigger value="config">⚙️ Config</TabsTrigger>
+          <TabsTrigger value="chat">🤖 Chat</TabsTrigger>
         </TabsList>
 
         <TabsContent value="upload" className="space-y-6">
@@ -108,6 +118,10 @@ export default function Home() {
 
         <TabsContent value="config">
           <ConfigPanel />
+        </TabsContent>
+
+        <TabsContent value="chat">
+          <ChatBot />
         </TabsContent>
       </Tabs>
     </div>
